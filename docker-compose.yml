@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16
+    container_name: personal-budget-db
+    environment:
+      POSTGRES_DB: budget
+      POSTGRES_USER: budget
+      POSTGRES_PASSWORD: budget
+    ports:
+      - "5432:5432"
+    volumes:
+      - budget-db-data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: personal-budget-api
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/budget
+      SPRING_DATASOURCE_USERNAME: budget
+      SPRING_DATASOURCE_PASSWORD: budget
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+      SPRING_JPA_OPEN_IN_VIEW: false
+      SPRING_FLYWAY_ENABLED: true
+    ports:
+      - "8080:8080"
+
+volumes:
+  budget-db-data:
