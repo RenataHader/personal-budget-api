@@ -19,7 +19,7 @@ public class Account {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 19, scale = 2)
     private BigDecimal balance = BigDecimal.ZERO;
 
     protected Account() {}
@@ -27,5 +27,13 @@ public class Account {
     public Account(String name){
         this.name = name;
         this.balance = BigDecimal.ZERO;
+    }
+
+    public void increaseBalance(BigDecimal amount) {
+        this.balance = this.balance.add(amount);
+    }
+
+    public void decreaseBalance(BigDecimal amount) {
+        this.balance = this.balance.subtract(amount);
     }
 }
