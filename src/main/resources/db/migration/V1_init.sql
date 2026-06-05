@@ -1,12 +1,12 @@
-CREATE TABLE account(
+CREATE TABLE accounts(
     id BIGSERIAL PRIMARY KEY,
-    name VARCHARE(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     balance NUMERIC(19, 2) NOT NULL DEFAULT 0
 );
 
 CREATE TABLE transactions(
     id BIGSERIAL PRIMARY KEY,
-    amount NUMERIC(19, 2) NOT NULL
+    amount NUMERIC(19, 2) NOT NULL,
     type VARCHAR(10) NOT NULL,
     category VARCHAR(255) NOT NULL,
     description TEXT,
